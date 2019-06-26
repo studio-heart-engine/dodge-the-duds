@@ -1,26 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Mob.gd" type="Script" id=1]
-[ext_resource path="res://art/Dud-Ray.png" type="Texture" id=2]
-[ext_resource path="res://art/Dud-Vincent.png" type="Texture" id=3]
-[ext_resource path="res://art/Dud-Ethan.png" type="Texture" id=4]
+[ext_resource path="res://art/Dud-Ray1.png" type="Texture" id=2]
+[ext_resource path="res://art/Dud-Ray2.png" type="Texture" id=3]
+[ext_resource path="res://art/Dud-Vincent1.png" type="Texture" id=4]
+[ext_resource path="res://art/Dud-Vincent2.png" type="Texture" id=5]
+[ext_resource path="res://art/Dud-Ethan1.png" type="Texture" id=6]
+[ext_resource path="res://art/Dud-Ethan2.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Ray",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Vincent",
-"speed": 5.0
+"speed": 3.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Ethan",
-"speed": 4.0
+"speed": 3.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]

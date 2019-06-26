@@ -1,19 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://art/Dud-Will.png" type="Texture" id=2]
+[ext_resource path="res://art/Dud-Will1.png" type="Texture" id=2]
+[ext_resource path="res://art/Dud-Will2.png" type="Texture" id=3]
+[ext_resource path="res://art/Dud-Will-Death1.png" type="Texture" id=4]
+[ext_resource path="res://art/Dud-Will-Death2.png" type="Texture" id=5]
+[ext_resource path="res://art/Dud-Will-Death3.png" type="Texture" id=6]
+[ext_resource path="res://art/Dud-Will-Death4.png" type="Texture" id=7]
+[ext_resource path="res://art/Dud-Will-Death5.png" type="Texture" id=8]
+[ext_resource path="res://art/Dud-Will-Death6.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "right",
-"speed": 5.0
+"speed": 3.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "up",
-"speed": 5.0
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "death",
+"speed": 3.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -27,11 +39,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Player" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
-animation = "up"
+animation = "death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 5.0
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]

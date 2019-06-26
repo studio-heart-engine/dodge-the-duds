@@ -1,12 +1,11 @@
 extends CanvasLayer
 
 signal start_game
-signal show_instructions
 signal flip_color
 
 func _ready():
 	$InstructionLabel.hide()
-	$InstructionButton.hide()
+
 
 func show_message(text, time):
 	$MessageLabel.text = text
@@ -22,7 +21,7 @@ func show_game_over():
 	$Name.show()
 	yield(get_tree().create_timer(1), 'timeout')
 	$StartButton.show()
-	#$InstructionButton.show()
+	$InstructionButton.show()
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -32,16 +31,26 @@ func _on_MessageTimer_timeout():
 
 func _on_StartButton_pressed():
 	hide()
+	$ScoreLabel.show()
 	emit_signal("flip_color")
 	emit_signal("start_game")
 
 func _on_InstructionButton_pressed():
-	hide()
-	#$InstructionButton.show()
-	emit_signal("show_instructions")
+	if ($InstructionButton.text == "Instructions"):
+		hide()
+		$InstructionButton.show()
+		$InstructionButton.text = "Back"
+		$InstructionLabel.show()
+	else:
+		$Name.show()
+		$StartButton.show()
+		$InstructionLabel.hide()
+		$ScoreLabel.show()
+		$InstructionButton.text = "Instructions"
 
 func hide():
 	$StartButton.hide()
 	$InstructionButton.hide()
+	$ScoreLabel.hide()
 	$Name.hide()
 

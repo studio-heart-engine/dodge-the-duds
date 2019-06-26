@@ -5,6 +5,8 @@ var score
 
 func _ready():
 	randomize()
+	$PoofStart.hide()
+	$PoofEnd.hide()
 
 func new_game():
 	score = 0
@@ -41,7 +43,6 @@ func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
 
-
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
@@ -49,3 +50,22 @@ func _on_StartTimer_timeout():
 func _on_HUD_flip_color():
 	$Background.color = $Background.color.inverted()
 
+
+func _on_Player_end_poof(position):
+	$PoofEnd.show()
+	$PoofEnd.frame = 0
+	$PoofEnd.position = position
+	$PoofEnd.play()
+	yield(get_tree().create_timer(1.4), "timeout")
+	$PoofEnd.stop()
+	$PoofEnd.hide()
+
+
+func _on_Player_start_poof(position):
+	$PoofStart.show()
+	$PoofStart.frame = 0
+	$PoofStart.position = position
+	$PoofStart.play()
+	yield(get_tree().create_timer(1.4), "timeout")
+	$PoofStart.stop()
+	$PoofStart.hide()

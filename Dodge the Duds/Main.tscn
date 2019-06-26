@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Poof.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 720, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0 )
 }
 
 [node name="Main" type="Node"]
@@ -15,12 +16,12 @@ script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="."]
-margin_right = 480.0
-margin_bottom = 722.0
+margin_right = 720.0
+margin_bottom = 1080.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 133.315, 95.9303 )
+position = Vector2( 40, 130 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -32,7 +33,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="StartPosition" type="Position2D" parent="."]
-position = Vector2( 240, 300 )
+position = Vector2( 360, 540 )
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource( 1 )
@@ -40,7 +41,15 @@ curve = SubResource( 1 )
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="PoofStart" parent="." instance=ExtResource( 5 )]
+position = Vector2( 40, 40 )
+
+[node name="PoofEnd" parent="." instance=ExtResource( 5 )]
+position = Vector2( 120, 40 )
+[connection signal="end_poof" from="Player" to="." method="_on_Player_end_poof"]
 [connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="start_poof" from="Player" to="." method="_on_Player_start_poof"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
