@@ -6,7 +6,8 @@ Controls:
 WASD to move
 Space to blink (hold a direction while pressing space)
 
-Created by Studio Heart Engine. 
+Created by Studio Heart Engine.
+Contributors: Will (Jiahua) Liang
 
 Created in Godot Game Engine
 https://godotengine.org
