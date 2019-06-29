@@ -19,12 +19,10 @@ func new_game():
 	yield(get_tree().create_timer(1), "timeout")
 	$HUD.show_message("1", 1)
 
-
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
-
 
 func _on_MobTimer_timeout():
 	$MobPath/MobSpawnLocation.set_offset(randi())
